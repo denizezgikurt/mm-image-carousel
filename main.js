@@ -1,7 +1,7 @@
 // wrapping the code with onload to execute JS immediately
 window.onload = function() {
-	//variables for slide animation
-	var slideDelay = 1.5;
+	//variables for slide animation time
+	var slideDelay = 1.5; //the slides flow in every 1.5 seconds
 	var slideDuration = 0.3;
 
 	var slides = document.querySelectorAll(".slide");
@@ -18,10 +18,10 @@ window.onload = function() {
 		});
 	}
 
-	// auto animation (the timer can be added if we want to auto animate after a certain idle-time)
+	// auto animation (the timer can be added to auto animate after a certain idle-time)
 
 	var wrap = wrapPartial(-100, (numSlides - 1) * 100);
-	var timer = TweenLite.delayedCall(slideDelay, autoPlay);
+	var timer = TweenLite.delayedCall(3, autoPlay);
 
 	var animation = TweenMax.to(slides, 1, {
 		xPercent: "+=" + (numSlides * 100),
@@ -78,6 +78,7 @@ window.onload = function() {
 		return Math.round(x / slideWidth) * slideWidth;
 	}
 
+	//calculating the necessary width for slide animation
 	function resize() {
 		var norm = (transform.x / wrapWidth) || 0;
 

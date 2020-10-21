@@ -12,7 +12,7 @@ main {
 	border: 1px solid #000000;
 }
 
-/* navigations */
+/* the header and navigations */
 .controls {
     padding: 10px;
     display: flex;
