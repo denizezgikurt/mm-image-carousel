@@ -2,15 +2,21 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<link rel="stylesheet" type="text/css" href="css/stylesheet.css">
+		<link rel="stylesheet" type="text/css" href="style.css">
 		<title></title>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.2/TweenLite.min.js"></script>
+
+	<script type="text/javascript" src="main.js">
+	</script>
+
 	</head>
 	<body>
-		<div id="wrapper">
-		    <div class="slider-holder">
-				<div class="slider-nav">
-					<div class="slider-nav-btn go-prev">Prev</div>
-					<div class="slider-nav-btn go-next">Next</div>
+		<div class="wrapper">
+		    <div class="slide-container">
+				<div class="controls">
+					<button id="prevButton"></button>
+					<div class="logo"><img src="image/img_logo_mm_transparent.png"/></div>
+				    <button id="nextButton"></button>
 				</div>
 		        <div class="slider">
 		            <div class="slider-item"><img src="/image/img_slide_1.png"/></div>
@@ -19,6 +25,9 @@
 		            <div class="slider-item"><img src="/image/img_slide_4.png"/></div>
 		            <div class="slider-item"><img src="/image/img_slide_5.png"/></div>
 		        </div>
+
+				<div class="slider-nav-btn start-autoplay">Start autoplay</div>
+<div class="slider-nav-btn stop-autoplay">Stop autoplay</div>
 
 		    </div>
 		</div>
