@@ -1,4 +1,6 @@
+// wrapping the code with onload to execute JS immediately
 window.onload = function() {
+	//variables for slide animation
 	var slideDelay = 1.5;
 	var slideDuration = 0.3;
 
@@ -8,11 +10,15 @@ window.onload = function() {
 
 	var numSlides = slides.length;
 
+	//infinite slide rotation
+
 	for (var i = 0; i < numSlides; i++) {
 		TweenLite.set(slides[i], {
 			xPercent: i * 100
 		});
 	}
+
+	// auto animation (the timer can be added if we want to auto animate after a certain idle-time)
 
 	var wrap = wrapPartial(-100, (numSlides - 1) * 100);
 	var timer = TweenLite.delayedCall(slideDelay, autoPlay);
@@ -37,6 +43,7 @@ window.onload = function() {
 
 	window.addEventListener("resize", resize);
 
+	// navigation with buttons
 	prevButton.addEventListener("click", function() {
 		animateSlides(1);
 	});
@@ -56,6 +63,8 @@ window.onload = function() {
 			onUpdate: updateProgress
 		});
 	}
+
+	// auto-play function for auto animation
 
 	function autoPlay() {
 		animateSlides(-1);
@@ -83,6 +92,7 @@ window.onload = function() {
 		slideAnimation.progress(1);
 	}
 
+	//returns the difference between the passed function's max and min value
 	function wrapPartial(min, max) {
 		var diff = max - min;
 		return function(value) {

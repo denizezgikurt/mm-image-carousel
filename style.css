@@ -1,6 +1,7 @@
 * {
 	box-sizing: border-box;
 }
+/* the main wrapper box */
 main {
 	display: flex;
 	position: relative;
@@ -11,6 +12,7 @@ main {
 	border: 1px solid #000000;
 }
 
+/* navigations */
 .controls {
     padding: 10px;
     display: flex;
