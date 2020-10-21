@@ -1,123 +1,93 @@
-
 window.onload = function() {
-	var slider = document.querySelector(".slider");
-	var slides = slider.querySelector(".slider-item");
-	var navPrev = document.querySelector("#prevButton");
-	var navNext = document.querySelector("#nextButton");
+	var slideDelay = 1.5;
+	var slideDuration = 0.3;
 
-	var startAutoplay = document.querySelector(".start-autoplay");
-	var stopAutoplay = document.querySelector(".stop-autoplay");
+	var slides = document.querySelectorAll(".slide");
+	var prevButton = document.querySelector("#prevButton");
+	var nextButton = document.querySelector("#nextButton");
 
-	var slidesNum = slides.length;
-	var prevSlideID = null;
-	var currentSlideID = 0;
-	var isAnimating = false;
-	var isAutoPlay = false;
+	var numSlides = slides.length;
 
+	for (var i = 0; i < numSlides; i++) {
+		TweenLite.set(slides[i], {
+			xPercent: i * 100
+		});
+	}
 
+	var wrap = wrapPartial(-100, (numSlides - 1) * 100);
+	var timer = TweenLite.delayedCall(slideDelay, autoPlay);
 
-	function init() {
-		console.log(slides);
-		TweenLite.set(slides, {
-			left: "-100%"
+	var animation = TweenMax.to(slides, 1, {
+		xPercent: "+=" + (numSlides * 100),
+		ease: Linear.easeNone,
+		paused: true,
+		repeat: -1,
+		modifiers: {
+			xPercent: wrap
+		}
+	});
+
+	var proxy = document.createElement("div");
+	TweenLite.set(proxy, { x: "+=0" });
+	var transform = proxy._gsTransform;
+	var slideAnimation = TweenLite.to({}, 0.1, {});
+	var slideWidth = 0;
+	var wrapWidth = 0;
+	resize();
+
+	window.addEventListener("resize", resize);
+
+	prevButton.addEventListener("click", function() {
+		animateSlides(1);
+	});
+
+	nextButton.addEventListener("click", function() {
+		animateSlides(-1);
+	});
+
+	function animateSlides(direction) {
+		timer.restart(true);
+		slideAnimation.kill();
+
+		var x = snapX(transform.x + direction * slideWidth);
+
+		slideAnimation = TweenLite.to(proxy, slideDuration, {
+			x: x,
+			onUpdate: updateProgress
+		});
+	}
+
+	function autoPlay() {
+		animateSlides(-1);
+	}
+
+	function updateProgress() {
+		animation.progress(transform.x / wrapWidth);
+	}
+
+	function snapX(x) {
+		return Math.round(x / slideWidth) * slideWidth;
+	}
+
+	function resize() {
+		var norm = (transform.x / wrapWidth) || 0;
+
+		slideWidth = slides[0].offsetWidth;
+		wrapWidth = slideWidth * numSlides;
+
+		TweenLite.set(proxy, {
+			x: norm * wrapWidth
 		});
 
-		navPrev.addEventListener("click", gotoPrevSlide);
-		navNext.addEventListener("click", gotoNextSlide);
-
-		startAutoplay.addEventListener("click", startAutoplay);
-		stopAutoplay.addEventListener("click", stopAutoplay);
-
-		gotoSlide(0, 0);
+		animateSlides(0);
+		slideAnimation.progress(1);
 	}
 
-
-	function gotoPrevSlide() {
-		var slideToGo = currentSlideID - 1;
-		if (slideToGo <= -1) {
-			slideToGo = slidesNum - 1;
-		}
-		stopAutoPlay();
-		gotoSlide(slideToGo, 1, "prev");
-	}
-
-
-	function gotoNextSlide() {
-		var slideToGo = currentSlideID + 1;
-		if (slideToGo >= slidesNum) {
-			slideToGo = 0;
-		}
-		stopAutoPlay();
-		gotoSlide(slideToGo, 1, "next");
-	}
-
-	function gotoSlide(slideID, _time, _direction) {
-		if (!isAnimating) {
-			isAnimating = true;
-			prevSlideID = currentSlideID;
-			currentSlideID = slideID;
-
-
-			var prevSlide = slides[prevSlideID];
-			var currentSlide = slides[currentSlide];
-
-			var time = 1;
-			if (_time !== null) {
-				time = _time;
-			}
-			var direction = "next";
-			if (_direction != null) {
-				direction = _direction;
-			}
-			if (direction == "next") {
-				console.log(prevSlide, currentSlide, "next");
-
-				TweenLite.to(prevSlide, time, {
-					left: "-100%"
-				});
-				TweenLite.fromTo(currentSlide, time, {
-					left: "100%"
-				}, {
-					left: "0"
-				});
-			} else {
-				console.log(prevSlide, currentSlide, "else");
-
-				TweenLite.to(prevSlide, time, {
-					left: "100%"
-				});
-				TweenLite.fromTo(currentSlide, time, {
-					left: "-100%"
-				}, {
-					left: "0"
-				});
-			}
-			TweenLite.delayedCall(time, function() {
-				isAnimating = false;
-			});
+	function wrapPartial(min, max) {
+		var diff = max - min;
+		return function(value) {
+			var v = value - min;
+			return ((diff + v % diff) % diff) + min;
 		}
 	}
-
-	function play(){
-	  gotoNextSlide();
-	  TweenLite.delayedCall(4, play);
-	}
-
-	function startAutoPlay(immediate) {
-		if (immediate != null) {
-			immediate = false;
-		}
-
-		if (immediate) {
-			gotoNextSlide();
-		}
-		TweenLite.delayedCall(4, play);
-	}
-
-	function stopAutoPlay() {
-	  isAutoPlay = false;
-		TweenLite.killDelayedCallsTo(play);
-	}
-
-  init();
-};
+}

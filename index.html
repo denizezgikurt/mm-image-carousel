@@ -4,32 +4,30 @@
 		<meta charset="utf-8">
 		<link rel="stylesheet" type="text/css" href="style.css">
 		<title></title>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.2/TweenLite.min.js"></script>
-
-	<script type="text/javascript" src="main.js">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.2/TweenMax.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.2/plugins/ModifiersPlugin.min.js"></script>
+		<script type="text/javascript" src="./main.js">
 	</script>
 
 	</head>
 	<body>
 		<div class="wrapper">
-		    <div class="slide-container">
+		    <main>
 				<div class="controls">
-					<button id="prevButton"></button>
-					<div class="logo"><img src="image/img_logo_mm_transparent.png"/></div>
-				    <button id="nextButton"></button>
+					<button id="prevButton" style="background-image: url(./image/img_left_arrow.png);"></button>
+					<div class="logo"><img width="80" src="./image/img_logo_mm_transparent.png"/></div>
+				    <button id="nextButton" style="background-image: url(./image/img_right_arrow.png);"></button>
 				</div>
-		        <div class="slider">
-		            <div class="slider-item"><img src="/image/img_slide_1.png"/></div>
-		            <div class="slider-item"><img src="/image/img_slide_2.png"/></div>
-		            <div class="slider-item"><img src="/image/img_slide_3.png"/></div>
-		            <div class="slider-item"><img src="/image/img_slide_4.png"/></div>
-		            <div class="slider-item"><img src="/image/img_slide_5.png"/></div>
-		        </div>
-
-				<div class="slider-nav-btn start-autoplay">Start autoplay</div>
-<div class="slider-nav-btn stop-autoplay">Stop autoplay</div>
-
-		    </div>
+				<div class="slides-container">
+					<div class="slides-inner">
+						<div class="slide" style="background-image: url(./image/img_slide_1.png)"></div>
+						<div class="slide" style="background-image: url(./image/img_slide_2.png)"></div>
+						<div class="slide" style="background-image: url(./image/img_slide_3.png)"></div>
+						<div class="slide" style="background-image: url(./image/img_slide_4.png)"></div>
+						<div class="slide" style="background-image: url(./image/img_slide_5.png)"></div>
+					</div>
+				</div>
+		    </main>
 		</div>
 
 	</body>

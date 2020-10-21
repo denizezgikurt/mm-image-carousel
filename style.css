@@ -1,82 +1,66 @@
-div {
-	margin: 0;
-	padding: 0;
-	outline: none;
+* {
+	box-sizing: border-box;
 }
-
-.wrapper {
+main {
 	display: flex;
-    position: relative;
-    flex: 1;
-    width: 300px !important;
-    height: 250px !important;
-}
-
-
-.slide-container {
 	position: relative;
+	flex-direction: column;
+	width: 300px;
+	height: 250px;
+	overflow: hidden;
+	border: 1px solid #000000;
 }
 
 .controls {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 298px;
-  height: 50px;
-  min-height: 50px;
-  border: 2px solid black;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+	min-height: 60px;
+	border-bottom: 2px solid #000000;
 }
 
-.logo {
-	overflow: hidden;
-	max-width: auto;
-	align-content: center;
-	height: 50px;
-	width: 175px;
-	padding-left: 20px;
-	padding-right: 20px;
+.controls button {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: none;
+    outline: none;
+    background-repeat: no-repeat;
+    background-size: 70%;
+    cursor: pointer;
+    background-color: #000;
+    background-position: center center;
 }
 
-.logo > img {
-	padding-left: 42px;
-    padding-top: 6px;
-    height: 38px;
-    width: 92px;
-}
-
-.slider {
+.slides-container {
+	border-top: 2px solid #000000;
 	position: relative;
+	overflow: hidden;
+	display: flex;
+	flex: 1;
 }
 
-.slider-item {
+.slide {
 	position: absolute;
-	top: 0;
-	left: 0;
+	font-size: 90px;
+	font-weight: 700;
+	color: rgba(255,255,255,0.9);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+
+	width: 100%;
+
+	background-size: cover;
+	background-repeat: no-repeat;
 }
 
-.slider-item > img {
-	   width: 298px;
-	   height: 200px;
-	   border: 2px solid black;
-}
-
-
-/* navigation */
-#nextButton {
-	width: 30px;
-	height: 30px;
-	border: transparent;
-	border-radius: 70%;
-	background-image: url(/image/img_right_arrow.png);
-}
-
-#prevButton {
-	width: 30px;
-	height: 30px;
-	border: transparent;
-	border-radius: 100%;
-	background-image: url(/image/img_left_arrow.png);
-}
-
-button:hover {
+.slides-inner {
+	position: relative;
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
 }
