@@ -2,7 +2,7 @@
 
 Simple Image Carousel Slider with HTML, CSS, JS and GSAP TweenLite.
 
-##Table of Contents
+## Table of Contents
 * [General info](#general-info)
 * [Project components](#project-components)
 * [Steps](#steps)
