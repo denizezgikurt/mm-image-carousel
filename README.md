@@ -37,6 +37,6 @@ This project is an Image Carousel banner that has the following features;
 ## Notes:
 * For further status, the auto animation can be added with extra buttons, or by a timer that starts auto-animation after an idle time that arrow buttons are not clicked.
 * The GreenSock guideline that I've followed was including a draggable function too, but I removed it because it was a premium feature of GreenSock.
-* GSAP is super fun to learn and use! 
+* GSAP is super fun to learn and use! Very useful for making great animations also in 3D. 
 
 
